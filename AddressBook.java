@@ -8,13 +8,14 @@ public class AddressBook{
 	int countIndex;
 
 	AddressBook() {
+
 		System.out.println("Welcome to Address Book program in AddressBook Main class!!!!");
 	}
 	public void getDetails() {
 
 		System.out.println("Add person details.....");
 		ContactPerson person = new ContactPerson();
-
+		
 		System.out.println("Enter the First name of user Contact : ");
 		person.setFirstName(sc.next());
 		System.out.println("Enter the Last name of user Contact : ");
@@ -34,28 +35,9 @@ public class AddressBook{
 		System.out.println("Person added.....");
 		countIndex++;
 	}
-	public void displayPersonAddress() {
-		for(int i=0;i<person.size();i++) 
-			System.out.println(person.get(i)+" ");
-	}
-	public void deleteContact() {
-		System.out.println("Enter person firstname you want to delete from address book : ");
-		String deleteName = sc.next();
-		int index=0;
-		boolean isFoundPerson=false;
-		for(int i=0;i<person.size();i++) {
-			if(person.get(i).getFirstName().equals(deleteName)) {
-				index= i;
-				isFoundPerson = true;
-				break;
-			}
-		}
-		if(isFoundPerson) {
-			person.remove(index);
-			System.out.println("given person name is deleted.....");
-		}
-		else
-			System.out.println("Not found in the list to be deleted.....");
+	public void displayPersonAddress(int numOfContact) {
+		for(int i=0;i<numOfContact;i++) 
+			System.out.println(person+" ");
 	}
 	public static void main(String[] args) {
 
@@ -65,10 +47,6 @@ public class AddressBook{
 		int numOfContact = sc.nextInt();
 		for(int i=0;i<numOfContact;i++) 
 			address.getDetails();
-		System.out.println("displaying the list from address book before deleting.....");
-		address.displayPersonAddress();
-		address.deleteContact();
-		System.out.println("displaying the list from address book after deleting.....");
-		address.displayPersonAddress();
+		address.displayPersonAddress(numOfContact);
 	}
 }
