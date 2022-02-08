@@ -1,61 +1,74 @@
 package com.Bridgelabz.Day10Assignment;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBook{
-	private String firstName;
-	private String lastName;
-	private String city;
-	private String state;
-	private String zip;
-	private String phoneNumber;
-	private String gmail;
-	AddressBook() {
 
+	ArrayList<ContactPerson> person = new ArrayList<>();
+	Scanner sc = new Scanner(System.in);
+	int countIndex;
+
+	AddressBook() {
 		System.out.println("Welcome to Address Book program in AddressBook Main class!!!!");
 	}
 	public void getDetails() {
 
-		Scanner sc = new Scanner(System.in);
+		System.out.println("Add person details.....");
+		ContactPerson person = new ContactPerson();
+
 		System.out.println("Enter the First name of user Contact : ");
-		this.firstName= sc.nextLine();
+		person.setFirstName(sc.next());
 		System.out.println("Enter the Last name of user Contact : ");
-		this.lastName= sc.nextLine();
+		person.setLastName(sc.next());
+		System.out.println("Enter the address of user Contact : ");
+		person.setAddress(sc.next());
 		System.out.println("Enter the City of user Contact : ");
-		this.city= sc.nextLine();
+		person.setCity(sc.next());
 		System.out.println("Enter the State of user Contact : ");
-		this.state= sc.nextLine();
+		person.setState(sc.next());
 		System.out.println("Enter the ZipCode of user Contact : ");
-		this.zip= sc.nextLine();
+		person.setZip(sc.next());
 		System.out.println("Enter the Phone Number of user Contact : ");
-		this.phoneNumber= sc.nextLine();
+		person.setPhoneNumber(sc.next());
 		System.out.println("Enter the Gmail of user Contact : ");
-		this.gmail= sc.nextLine();
-
+		person.setGmail(sc.next());
+		System.out.println("Person added.....");
+		countIndex++;
 	}
-	public void displayAddress() {
-
-		System.out.println("Details of User Contact ");
-		System.out.println("First Name :"+firstName);
-		System.out.println("Last Name :"+lastName);
-		System.out.println("City :"+city);
-		System.out.println("State :"+state);
-		System.out.println("Zipcode :"+zip);
-		System.out.println("Phone Number :"+phoneNumber);
-		System.out.println("Gmail Address :"+gmail);
+	public void displayPersonAddress() {
+		for(int i=0;i<person.size();i++) 
+			System.out.println(person.get(i)+" ");
 	}
-	public void editContact() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the name of user Contact that you want to change : ");
-		this.firstName= sc.nextLine();
+	public void deleteContact() {
+		System.out.println("Enter person firstname you want to delete from address book : ");
+		String deleteName = sc.next();
+		int index=0;
+		boolean isFoundPerson=false;
+		for(int i=0;i<person.size();i++) {
+			if(person.get(i).getFirstName().equals(deleteName)) {
+				index= i;
+				isFoundPerson = true;
+				break;
+			}
+		}
+		if(isFoundPerson) {
+			person.remove(index);
+			System.out.println("given person name is deleted.....");
+		}
+		else
+			System.out.println("Not found in the list to be deleted.....");
 	}
 	public static void main(String[] args) {
 
 		AddressBook address = new AddressBook();
-		address.getDetails();
-		System.out.println("Contact details before changes....");
-		address.displayAddress();
-		System.out.println("Contact details after changes....");
-		address.editContact();
-		address.displayAddress();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter how many contacts you want to add in address book : ");
+		int numOfContact = sc.nextInt();
+		for(int i=0;i<numOfContact;i++) 
+			address.getDetails();
+		System.out.println("displaying the list from address book before deleting.....");
+		address.displayPersonAddress();
+		address.deleteContact();
+		System.out.println("displaying the list from address book after deleting.....");
+		address.displayPersonAddress();
 	}
 }
